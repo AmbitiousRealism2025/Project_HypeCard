@@ -92,26 +92,22 @@ const HyperCardContext = createContext<{
   dispatch: React.Dispatch<NavigationAction>;
 } | null>(null);
 
-export function HyperCardProvider({ children }: { children: React.ReactNode }) {
-  const [state, dispatch] = useReducer(hypercardReducer, initialState);
-
-  // Load from localStorage on mount
-  useEffect(() => {
+function initState(): HyperCardState {
+  if (typeof window !== 'undefined') {
     const saved = localStorage.getItem('hypercard-ai-primer-state');
     if (saved) {
       try {
-        const savedState = JSON.parse(saved);
-        dispatch({ type: 'GO_TO_CARD', payload: savedState.currentCard });
-        if (savedState.userProgress) {
-          savedState.userProgress.visitedCards?.forEach((card: number) => {
-            dispatch({ type: 'GO_TO_CARD', payload: card });
-          });
-        }
+        return { ...initialState, ...JSON.parse(saved) };
       } catch (e) {
         console.warn('Failed to load saved state:', e);
       }
     }
-  }, []);
+  }
+  return initialState;
+}
+
+export function HyperCardProvider({ children }: { children: React.ReactNode }) {
+  const [state, dispatch] = useReducer(hypercardReducer, initialState, initState);
 
   // Save to localStorage on state changes
   useEffect(() => {
