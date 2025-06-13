@@ -1,0 +1,11 @@
+{
+  "title": "Five Everyday AI Tools",
+  "intro": "Click on any tool below to learn more about how AI powers it:",
+  "tools": [
+    { "name": "Search Engines", "description": "Google and Bing use AI to understand your queries and rank results intelligently.", "icon": "computer" },
+    { "name": "Voice Assistants", "description": "Siri, Alexa, and Google Assistant use AI to understand speech and respond naturally.", "icon": "robot" },
+    { "name": "Recommendation Systems", "description": "Netflix, Spotify, and Amazon use AI to suggest content you might like.", "icon": "lightbulb" },
+    { "name": "Navigation Apps", "description": "Google Maps and Waze use AI to find optimal routes and predict traffic.", "icon": "gear" },
+    { "name": "Photo Recognition", "description": "Your phone's camera can identify objects, faces, and text using AI.", "icon": "brain" }
+  ]
+}

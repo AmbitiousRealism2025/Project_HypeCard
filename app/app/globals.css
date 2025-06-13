@@ -15,6 +15,17 @@
   --hc-shadow: #666666;
 }
 
+.dark {
+  --hc-white: #000000;
+  --hc-black: #ffffff;
+  --hc-gray-light: #333333;
+  --hc-gray-medium: #555555;
+  --hc-gray-dark: #777777;
+  --hc-shadow: #000000;
+  background-color: var(--hc-gray-medium);
+  color: var(--hc-white);
+}
+
 * {
   box-sizing: border-box;
 }

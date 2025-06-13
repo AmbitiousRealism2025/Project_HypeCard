@@ -1,0 +1,12 @@
+{
+  "title": "What is AI?",
+  "intro": "Artificial Intelligence (AI) is the simulation of human intelligence in machines that are programmed to think and learn like humans.",
+  "characteristics": [
+    "Learning",
+    "Reasoning",
+    "Problem-solving",
+    "Perception",
+    "Language"
+  ],
+  "explanation": "AI systems can perform tasks that typically require human intelligence, from recognizing speech to making decisions."
+}

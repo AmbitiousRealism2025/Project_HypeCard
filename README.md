@@ -294,11 +294,11 @@ yarn lint         # Run ESLint
 - **Add automated testing** ✅ Implemented using Jest and React Testing Library.
 - **Simplify state persistence** ✅ State now initializes directly from saved data in `hypercard-context.tsx`.
 - **Lazy load cards** ✅ `CardStack` dynamically imports each card component.
-- **Externalize card content**: Storing text and quiz data in Markdown or JSON allows easier editing and translation outside of the codebase.
-- **Enable theming**: A `ThemeProvider` component exists but isn't used. Integrating it would allow dark mode or high‑contrast themes for improved accessibility.
-- **Introduce error boundaries**: Wrapping the application with React error boundaries will help display a friendly fallback UI when runtime errors occur.
-- **Audit dependencies**: The project includes a large number of packages. Reviewing and removing unused dependencies will keep builds lean.
-- **Persist progress server-side**: Leveraging Prisma with user accounts would enable syncing progress across devices.
+- **Externalize card content** ✅ Card data moved to JSON files for easier editing.
+- **Enable theming** ✅ Theme provider integrated with a toggle for dark mode.
+- **Introduce error boundaries** ✅ Application wrapped with a reusable error boundary component.
+- **Audit dependencies** ✅ Removed unused packages like charting and map libraries.
+- **Persist progress server-side** ✅ Progress now saved to a Prisma `Progress` table via an API route.
 
 ---
 

@@ -6,38 +6,13 @@ import { useHyperCard } from '../../lib/hypercard-context';
 import { HCButton } from '../hc-button';
 import { HCField } from '../hc-field';
 import { HCSprite } from '../hc-sprite';
+import cardContent from '../../data/card-3.json';
 
 export function Card3AITools() {
   const { dispatch } = useHyperCard();
   const [selectedTool, setSelectedTool] = useState<string | null>(null);
 
-  const tools = [
-    {
-      name: "Search Engines",
-      description: "Google and Bing use AI to understand your queries and rank results intelligently.",
-      icon: "computer" as const
-    },
-    {
-      name: "Voice Assistants", 
-      description: "Siri, Alexa, and Google Assistant use AI to understand speech and respond naturally.",
-      icon: "robot" as const
-    },
-    {
-      name: "Recommendation Systems",
-      description: "Netflix, Spotify, and Amazon use AI to suggest content you might like.",
-      icon: "lightbulb" as const
-    },
-    {
-      name: "Navigation Apps",
-      description: "Google Maps and Waze use AI to find optimal routes and predict traffic.",
-      icon: "gear" as const
-    },
-    {
-      name: "Photo Recognition",
-      description: "Your phone's camera can identify objects, faces, and text using AI.",
-      icon: "brain" as const
-    }
-  ];
+  const tools = cardContent.tools;
 
   const handleToolClick = (toolName: string) => {
     setSelectedTool(selectedTool === toolName ? null : toolName);
@@ -52,14 +27,14 @@ export function Card3AITools() {
     <div className="w-full h-full bg-white p-3 flex flex-col">
       {/* Header */}
       <div className="text-center mb-2">
-        <h1 className="text-lg font-bold mb-1">Five Everyday AI Tools</h1>
+        <h1 className="text-lg font-bold mb-1">{cardContent.title}</h1>
         <div className="w-full h-px bg-black mb-2"></div>
       </div>
 
       {/* Main content */}
       <div className="flex-1 space-y-1">
         <HCField readonly className="text-center text-xs">
-          Click on any tool below to learn more about how AI powers it:
+          {cardContent.intro}
         </HCField>
 
         {tools.map((tool, index) => (
