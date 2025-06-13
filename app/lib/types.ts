@@ -17,13 +17,10 @@ export interface HyperCardState {
   };
 }
 
-export interface NavigationAction {
-  type:
-    | 'NEXT_CARD'
-    | 'PREV_CARD'
-    | 'GO_TO_CARD'
-    | 'UPDATE_PROGRESS'
-    | 'SAVE_QUIZ_ANSWER'
-    | 'SAVE_QUIZ_RESULT';
-  payload?: any;
-}
+export type NavigationAction =
+  | { type: 'NEXT_CARD' }
+  | { type: 'PREV_CARD' }
+  | { type: 'GO_TO_CARD'; payload: number }
+  | { type: 'UPDATE_PROGRESS'; payload: string }
+  | { type: 'SAVE_QUIZ_ANSWER'; payload: { question: number; answer: string } }
+  | { type: 'SAVE_QUIZ_RESULT'; payload: { score: number } };
