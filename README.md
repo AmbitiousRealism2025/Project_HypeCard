@@ -23,11 +23,13 @@ This project recreates the iconic HyperCard experience from 1987, complete with 
 4. **Routing System**: Implemented SPA routing for direct card access via URLs
 
 ### Stage 2: Content and Educational Structure
-1. **Card Development**: Created 4-card educational deck covering AI fundamentals
+1. **Card Development**: Created 6-card educational deck covering AI fundamentals
    - Card 1: Welcome and introduction
    - Card 2: "What is AI?" - Core concepts and definitions
    - Card 3: "AI Tools" - Practical applications and examples
    - Card 4: Interactive quiz with progress tracking
+   - Card 5: Advanced quiz with scoring and certificate
+   - Card 6: Gesture and certificate instructions
 2. **Content Integration**: Added educational content with proper information hierarchy
 3. **Interactive Elements**: Implemented quiz functionality with answer persistence
 
@@ -113,7 +115,9 @@ This project recreates the iconic HyperCard experience from 1987, complete with 
     │   │   ├── card-1-welcome.tsx   # Welcome/intro card
     │   │   ├── card-2-what-is-ai.tsx # AI concepts explanation
     │   │   ├── card-3-ai-tools.tsx  # Practical AI applications
-    │   │   └── card-4-quiz.tsx      # Interactive quiz
+    │   │   ├── card-4-quiz.tsx      # Interactive quiz
+    │   │   ├── card-5-advanced-quiz.tsx # Advanced quiz with certificate
+    │   │   └── card-6-gestures.tsx  # Gesture instructions
     │   ├── ui/                      # Radix UI components
     │   ├── card-stack.tsx           # Main card container
     │   ├── card-viewport.tsx        # Card display viewport

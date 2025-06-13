@@ -14,7 +14,7 @@ function CardPageContent() {
 
   useEffect(() => {
     const cardId = parseInt(params.id as string);
-    if (isNaN(cardId) || cardId < 1 || cardId > 4) {
+    if (isNaN(cardId) || cardId < 1 || cardId > state.totalCards) {
       router.push('/');
       return;
     }
