@@ -16,3 +16,14 @@ model Progress {
     createdAt  DateTime @default(now())
     updatedAt  DateTime @updatedAt
 }
+
+model QuizResult {
+    id        Int      @id @default(autoincrement())
+    sessionId String
+    result    Json
+    score     Int
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([sessionId])
+}

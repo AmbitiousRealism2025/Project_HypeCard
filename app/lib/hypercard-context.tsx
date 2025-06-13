@@ -6,11 +6,12 @@ import { HyperCardState, NavigationAction } from './types';
 
 const initialState: HyperCardState = {
   currentCard: 1,
-  totalCards: 4,
+  totalCards: 5,
   userProgress: {
     visitedCards: [1],
     quizAnswers: {},
-    completedSections: []
+    completedSections: [],
+    quizScore: 0
   }
 };
 
@@ -67,6 +68,15 @@ function hypercardReducer(state: HyperCardState, action: NavigationAction): Hype
             ...state.userProgress.quizAnswers,
             [action.payload.question]: action.payload.answer
           }
+        }
+      };
+
+    case 'SAVE_QUIZ_RESULT':
+      return {
+        ...state,
+        userProgress: {
+          ...state.userProgress,
+          quizScore: action.payload.score
         }
       };
     

@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "type": "multiple-choice",
+    "question": "Which of these is a type of machine learning?",
+    "options": ["Supervised learning", "Random searching", "Alchemy", "Supercharging"],
+    "answer": "Supervised learning",
+    "points": 10
+  },
+  {
+    "id": 2,
+    "type": "true-false",
+    "question": "Neural networks are inspired by the human brain.",
+    "answer": true,
+    "points": 5
+  },
+  {
+    "id": 3,
+    "type": "text",
+    "question": "Name one commonly used library for building neural networks in JavaScript.",
+    "answer": "TensorFlow.js",
+    "points": 15
+  }
+]
