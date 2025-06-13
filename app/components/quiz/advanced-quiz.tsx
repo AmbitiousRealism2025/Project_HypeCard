@@ -14,6 +14,18 @@ export function AdvancedQuiz() {
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [score, setScore] = useState<number | null>(null);
 
+  const exportCertificate = () => {
+    const el = document.getElementById('certificate');
+    if (!el) return;
+    const html = el.outerHTML;
+    const win = window.open('', '_blank');
+    if (!win) return;
+    win.document.write(`<html><body>${html}</body></html>`);
+    win.document.close();
+    win.focus();
+    win.print();
+  };
+
   const question = questions[current];
 
   const handleChange = (val: string) => {
@@ -57,9 +69,14 @@ export function AdvancedQuiz() {
           Your score: {score}
         </HCField>
         {score >= 20 && (
-          <div id="certificate" className="p-2 border text-xs">
-            <strong>Certificate of Completion</strong>
-            <div>You passed the AI Primer Quiz!</div>
+          <div className="space-y-2">
+            <div id="certificate" className="p-2 border text-xs">
+              <strong>Certificate of Completion</strong>
+              <div>You passed the AI Primer Quiz!</div>
+            </div>
+            <HCButton onClick={exportCertificate} className="px-2 py-1 text-xs">
+              Export Certificate
+            </HCButton>
           </div>
         )}
       </div>
