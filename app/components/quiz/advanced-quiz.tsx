@@ -1,6 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
 import questionsData from '../../data/advanced-quiz.json';
 import { QuizQuestion, Question } from './question';
 import { HCButton } from '../hc-button';
@@ -13,17 +15,18 @@ export function AdvancedQuiz() {
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [score, setScore] = useState<number | null>(null);
+  const certificateRef = useRef<HTMLDivElement>(null);
 
-  const exportCertificate = () => {
-    const el = document.getElementById('certificate');
-    if (!el) return;
-    const html = el.outerHTML;
-    const win = window.open('', '_blank');
-    if (!win) return;
-    win.document.write(`<html><body>${html}</body></html>`);
-    win.document.close();
-    win.focus();
-    win.print();
+  const exportCertificate = async () => {
+    if (!certificateRef.current) return;
+    const canvas = await html2canvas(certificateRef.current);
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF();
+    const imgProps = pdf.getImageProperties(imgData);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save('certificate.pdf');
   };
 
   const question = questions[current];
@@ -32,15 +35,15 @@ export function AdvancedQuiz() {
     setAnswers((a) => ({ ...a, [question.id]: val }));
   };
 
-  const next = () => {
+  const next = async () => {
     if (current < questions.length - 1) {
       setCurrent(current + 1);
     } else {
-      finish();
+      await finish();
     }
   };
 
-  const finish = () => {
+  const finish = async () => {
     let total = 0;
     questions.forEach((q) => {
       const user = answers[q.id];
@@ -49,17 +52,21 @@ export function AdvancedQuiz() {
       const provided = typeof q.answer === 'boolean' ? user : user.toLowerCase();
       if (provided === correct) total += q.points;
     });
-    setScore(total);
     dispatch({ type: 'SAVE_QUIZ_RESULT', payload: { answers, score: total } });
     const sessionId =
       typeof window !== 'undefined'
         ? localStorage.getItem('hypercard-session-id') || ''
         : '';
-    fetch('/api/quiz', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sessionId, result: answers, score: total }),
-    }).catch((e) => console.warn('Failed to save quiz', e));
+    try {
+      await fetch('/api/quiz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId, result: answers, score: total }),
+      });
+    } catch (e) {
+      console.warn('Failed to save quiz', e);
+    }
+    setScore(total);
   };
 
   if (score !== null) {
@@ -70,7 +77,11 @@ export function AdvancedQuiz() {
         </HCField>
         {score >= 20 && (
           <div className="space-y-2">
-            <div id="certificate" className="p-2 border text-xs">
+            <div
+              id="certificate"
+              ref={certificateRef}
+              className="p-2 border text-xs"
+            >
               <strong>Certificate of Completion</strong>
               <div>You passed the AI Primer Quiz!</div>
             </div>
