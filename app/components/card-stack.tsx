@@ -2,11 +2,13 @@
 'use client';
 
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { useHyperCard } from '../lib/hypercard-context';
-import { Card1Welcome } from './cards/card-1-welcome';
-import { Card2WhatIsAI } from './cards/card-2-what-is-ai';
-import { Card3AITools } from './cards/card-3-ai-tools';
-import { Card4Quiz } from './cards/card-4-quiz';
+
+const Card1Welcome = dynamic(() => import('./cards/card-1-welcome').then(m => m.Card1Welcome));
+const Card2WhatIsAI = dynamic(() => import('./cards/card-2-what-is-ai').then(m => m.Card2WhatIsAI));
+const Card3AITools = dynamic(() => import('./cards/card-3-ai-tools').then(m => m.Card3AITools));
+const Card4Quiz = dynamic(() => import('./cards/card-4-quiz').then(m => m.Card4Quiz));
 
 export function CardStack() {
   const { state } = useHyperCard();
