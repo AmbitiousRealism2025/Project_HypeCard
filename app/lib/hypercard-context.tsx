@@ -6,7 +6,7 @@ import { HyperCardState, NavigationAction } from './types';
 
 const initialState: HyperCardState = {
   currentCard: 1,
-  totalCards: 5,
+  totalCards: 6,
   userProgress: {
     visitedCards: [1],
     quizAnswers: {},

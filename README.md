@@ -49,9 +49,10 @@ This project recreates the iconic HyperCard experience from 1987, complete with 
 ## ✨ Current MVP Features
 
 ### Core Functionality
-- **4-Card Educational Deck**: Complete AI primer with structured learning path
+- **6-Card Educational Deck**: Complete AI primer with structured learning path
 - **Authentic HyperCard Design**: Pixel-perfect 1987 monochrome Mac aesthetic
 - **Interactive Navigation**: Mouse, keyboard, and button-based navigation
+- **Swipe Gestures**: Swipe left/right on mobile to switch cards
 - **Progress Tracking**: Automatic saving of user progress and quiz answers
 - **Responsive Design**: Scales appropriately across devices while maintaining authenticity
 
@@ -65,6 +66,7 @@ This project recreates the iconic HyperCard experience from 1987, complete with 
 ### Educational Content
 - **Structured Learning**: Progressive difficulty from basic concepts to practical applications
 - **Interactive Quiz**: Advanced system with multiple question types, scoring and certificates
+- **Certificate Display**: View your certificate after completing the Advanced Quiz
 - **Visual Elements**: Custom sprites and icons enhancing the learning experience
 - **Progress Indicators**: Clear tracking of completed sections and visited cards
 
@@ -240,7 +242,9 @@ yarn lint         # Run ESLint
 - **Advanced Quiz System** ✅ Implemented with multiple question types, scoring, and certificate display. See [docs/quiz-system.md](docs/quiz-system.md)
 - **Interactive Animations** ✅ Card transitions, hover effects and loading states powered by Framer Motion
 - **Sound Effects** ✅ Mac-style audio feedback for UI actions
-- **Gesture Support**: Touch gestures for mobile navigation
+- **Gesture Support** ✅ Swipe left/right on touch devices to navigate cards
+- **See** [docs/interaction-guide.md](docs/interaction-guide.md) **for more details on interactions**
+- **Cross-Browser & Accessibility Tested** ✅ Verified keyboard navigation and screen reader labels
 
 ### Phase 3: Content Expansion
 - **Additional Card Decks**: Machine Learning, Neural Networks, AI Ethics
