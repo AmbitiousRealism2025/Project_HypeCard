@@ -28,7 +28,7 @@ This project recreates the iconic HyperCard experience from 1987, complete with 
    - Card 2: "What is AI?" - Core concepts and definitions
    - Card 3: "AI Tools" - Practical applications and examples
    - Card 4: Interactive quiz with progress tracking
-   - Card 5: Advanced quiz with scoring and certificate
+   - Card 5: Advanced quiz with scoring and certificate export
    - Card 6: Gesture and certificate instructions
 2. **Content Integration**: Added educational content with proper information hierarchy
 3. **Interactive Elements**: Implemented quiz functionality with answer persistence
@@ -72,7 +72,8 @@ This project recreates the iconic HyperCard experience from 1987, complete with 
 ### Educational Content
 - **Structured Learning**: Progressive difficulty from basic concepts to practical applications
 - **Interactive Quiz**: Advanced system with multiple question types, scoring and certificates
- - **Certificate Display**: View your certificate after completing the Advanced Quiz and export it as a PDF
+ - **Certificate Display**: View your certificate after completing the Advanced
+   Quiz and export it as a PDF using `html2canvas` and `jspdf`
 - **Visual Elements**: Custom sprites and icons enhancing the learning experience
 - **Progress Indicators**: Clear tracking of completed sections and visited cards
 

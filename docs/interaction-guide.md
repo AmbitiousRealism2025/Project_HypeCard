@@ -15,4 +15,5 @@ This guide summarizes the key interactive features available in HyperCard AI Pri
 ## Advanced Quiz & Certificates
 - The Advanced Quiz supports multiple question types with scoring.
 - After completing the quiz, a certificate appears at the bottom of the card.
- - Click the **Export Certificate** button to download a PDF of your achievement.
+ - Click the **Export Certificate** button to download a PDF of your
+   achievement. The export uses `html2canvas` and `jspdf` behind the scenes.

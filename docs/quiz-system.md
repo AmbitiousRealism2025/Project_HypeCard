@@ -17,8 +17,9 @@ This document outlines the high level structure of the Phase II quiz engine.
   endpoint. Data is stored in the `QuizResult` table defined in the Prisma
   schema.
  - **Certificate** – once the final score is calculated, a certificate is displayed if
-  the user scores at least 20 points, with an **Export Certificate** button that prints
-  the certificate as a PDF.
+  the user scores at least 20 points. The **Export Certificate** button uses
+  `html2canvas` and `jspdf` to render the certificate to an image and download it
+  as a PDF.
 
 ## Extending
 
