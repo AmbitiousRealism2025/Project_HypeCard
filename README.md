@@ -225,6 +225,9 @@ cd hypercard-ai-primer/app
 # Install dependencies
 yarn install
 
+# Generate Prisma client
+npx prisma generate
+
 # Start development server
 yarn dev
 
