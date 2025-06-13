@@ -217,6 +217,8 @@ yarn install
 - Yarn package manager
 - Modern web browser
 - Audio playback requires a user interaction to start due to browser autoplay policies
+- Some browsers restrict the number of active `AudioContext` instances, so each
+  component cleans up its audio context on unmount
 
 ### Installation and Development
 ```bash
