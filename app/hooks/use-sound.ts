@@ -7,14 +7,21 @@ export function useSound(enabled: boolean = true) {
     if (!enabled || typeof window === 'undefined') return
     const ctx = ctxRef.current ?? new AudioContext()
     ctxRef.current = ctx
+    // some browsers suspend the AudioContext until user interaction
+    ctx.resume().catch(() => {})
     const osc = ctx.createOscillator()
     const gain = ctx.createGain()
     osc.type = 'sine'
     osc.frequency.value = 880
     osc.connect(gain)
     gain.connect(ctx.destination)
-    osc.start()
-    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.2)
-    osc.stop(ctx.currentTime + 0.2)
+    const now = ctx.currentTime
+    osc.start(now)
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.2)
+    osc.stop(now + 0.2)
+    osc.onended = () => {
+      ctx.close().catch(() => {})
+      ctxRef.current = null
+    }
   }, [enabled])
 }
