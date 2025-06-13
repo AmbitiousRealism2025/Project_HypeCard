@@ -1,0 +1,134 @@
+
+'use client';
+
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import { HyperCardState, NavigationAction } from './types';
+
+const initialState: HyperCardState = {
+  currentCard: 1,
+  totalCards: 4,
+  userProgress: {
+    visitedCards: [1],
+    quizAnswers: {},
+    completedSections: []
+  }
+};
+
+function hypercardReducer(state: HyperCardState, action: NavigationAction): HyperCardState {
+  switch (action.type) {
+    case 'NEXT_CARD':
+      const nextCard = Math.min(state.currentCard + 1, state.totalCards);
+      const nextVisitedCards = state.userProgress.visitedCards.includes(nextCard) 
+        ? state.userProgress.visitedCards 
+        : [...state.userProgress.visitedCards, nextCard];
+      return {
+        ...state,
+        currentCard: nextCard,
+        userProgress: {
+          ...state.userProgress,
+          visitedCards: nextVisitedCards
+        }
+      };
+    
+    case 'PREV_CARD':
+      const prevCard = Math.max(state.currentCard - 1, 1);
+      const prevVisitedCards = state.userProgress.visitedCards.includes(prevCard) 
+        ? state.userProgress.visitedCards 
+        : [...state.userProgress.visitedCards, prevCard];
+      return {
+        ...state,
+        currentCard: prevCard,
+        userProgress: {
+          ...state.userProgress,
+          visitedCards: prevVisitedCards
+        }
+      };
+    
+    case 'GO_TO_CARD':
+      const targetCard = Math.max(1, Math.min(action.payload, state.totalCards));
+      const targetVisitedCards = state.userProgress.visitedCards.includes(targetCard) 
+        ? state.userProgress.visitedCards 
+        : [...state.userProgress.visitedCards, targetCard];
+      return {
+        ...state,
+        currentCard: targetCard,
+        userProgress: {
+          ...state.userProgress,
+          visitedCards: targetVisitedCards
+        }
+      };
+    
+    case 'SAVE_QUIZ_ANSWER':
+      return {
+        ...state,
+        userProgress: {
+          ...state.userProgress,
+          quizAnswers: {
+            ...state.userProgress.quizAnswers,
+            [action.payload.question]: action.payload.answer
+          }
+        }
+      };
+    
+    case 'UPDATE_PROGRESS':
+      const updatedSections = state.userProgress.completedSections.includes(action.payload) 
+        ? state.userProgress.completedSections 
+        : [...state.userProgress.completedSections, action.payload];
+      return {
+        ...state,
+        userProgress: {
+          ...state.userProgress,
+          completedSections: updatedSections
+        }
+      };
+    
+    default:
+      return state;
+  }
+}
+
+const HyperCardContext = createContext<{
+  state: HyperCardState;
+  dispatch: React.Dispatch<NavigationAction>;
+} | null>(null);
+
+export function HyperCardProvider({ children }: { children: React.ReactNode }) {
+  const [state, dispatch] = useReducer(hypercardReducer, initialState);
+
+  // Load from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('hypercard-ai-primer-state');
+    if (saved) {
+      try {
+        const savedState = JSON.parse(saved);
+        dispatch({ type: 'GO_TO_CARD', payload: savedState.currentCard });
+        if (savedState.userProgress) {
+          savedState.userProgress.visitedCards?.forEach((card: number) => {
+            dispatch({ type: 'GO_TO_CARD', payload: card });
+          });
+        }
+      } catch (e) {
+        console.warn('Failed to load saved state:', e);
+      }
+    }
+  }, []);
+
+  // Save to localStorage on state changes
+  useEffect(() => {
+    localStorage.setItem('hypercard-ai-primer-state', JSON.stringify(state));
+  }, [state]);
+
+  return (
+    <HyperCardContext.Provider value={{ state, dispatch }}>
+      {children}
+    </HyperCardContext.Provider>
+  );
+}
+
+export function useHyperCard() {
+  const context = useContext(HyperCardContext);
+  if (!context) {
+    throw new Error('useHyperCard must be used within a HyperCardProvider');
+  }
+  return context;
+}
