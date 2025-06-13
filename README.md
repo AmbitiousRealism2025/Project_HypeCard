@@ -67,6 +67,7 @@ This project recreates the iconic HyperCard experience from 1987, complete with 
 - **Keyboard Shortcuts**: Arrow keys (←/→) for navigation, Home key for card 1
 - **TypeScript Integration**: Full type safety throughout the application
 - **Component Architecture**: Reusable HyperCard-style components
+- **Configurable Toast Duration**: Set `NEXT_PUBLIC_TOAST_REMOVE_DELAY` to control toast removal timing (default 5000ms)
 
 ### Educational Content
 - **Structured Learning**: Progressive difficulty from basic concepts to practical applications
