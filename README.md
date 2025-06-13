@@ -64,7 +64,7 @@ This project recreates the iconic HyperCard experience from 1987, complete with 
 
 ### Educational Content
 - **Structured Learning**: Progressive difficulty from basic concepts to practical applications
-- **Interactive Quiz**: Multiple-choice questions with immediate feedback
+- **Interactive Quiz**: Advanced system with multiple question types, scoring and certificates
 - **Visual Elements**: Custom sprites and icons enhancing the learning experience
 - **Progress Indicators**: Clear tracking of completed sections and visited cards
 
@@ -237,8 +237,7 @@ yarn lint         # Run ESLint
 
 ## 🔮 Next Steps and Future Enhancements
 
-### Phase 2: Enhanced Interactivity
-- **Advanced Quiz System**: Multiple question types, scoring, certificates
+- **Advanced Quiz System** ✅ Implemented with multiple question types, scoring, and certificate display. See [docs/quiz-system.md](docs/quiz-system.md)
 - **Interactive Animations**: Card transitions, hover effects, loading states
 - **Sound Effects**: Authentic Mac system sounds and feedback
 - **Gesture Support**: Touch gestures for mobile navigation

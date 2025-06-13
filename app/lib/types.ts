@@ -13,10 +13,17 @@ export interface HyperCardState {
     visitedCards: number[];
     quizAnswers: Record<string, string>;
     completedSections: string[];
+    quizScore?: number;
   };
 }
 
 export interface NavigationAction {
-  type: 'NEXT_CARD' | 'PREV_CARD' | 'GO_TO_CARD' | 'UPDATE_PROGRESS' | 'SAVE_QUIZ_ANSWER';
+  type:
+    | 'NEXT_CARD'
+    | 'PREV_CARD'
+    | 'GO_TO_CARD'
+    | 'UPDATE_PROGRESS'
+    | 'SAVE_QUIZ_ANSWER'
+    | 'SAVE_QUIZ_RESULT';
   payload?: any;
 }
