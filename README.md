@@ -70,6 +70,7 @@ This project recreates the iconic HyperCard experience from 1987, complete with 
 - **TypeScript Integration**: Full type safety throughout the application
 - **Component Architecture**: Reusable HyperCard-style components
 - **Configurable Toast Duration**: Set `NEXT_PUBLIC_TOAST_REMOVE_DELAY` to control toast removal timing (default 5000ms)
+- **Toast Provider**: Wrap your app with `<ToastProvider>` from `use-toast` to enable toast notifications
 
 ### Educational Content
 - **Structured Learning**: Progressive difficulty from basic concepts to practical applications
