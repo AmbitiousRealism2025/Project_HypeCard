@@ -207,6 +207,7 @@ yarn install
 - Node.js 18 or higher
 - Yarn package manager
 - Modern web browser
+- Audio playback requires a user interaction to start due to browser autoplay policies
 
 ### Installation and Development
 ```bash
