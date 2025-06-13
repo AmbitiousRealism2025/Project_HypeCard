@@ -311,6 +311,7 @@ yarn lint         # Run ESLint
 - **Introduce error boundaries** ✅ Application wrapped with a reusable error boundary component.
 - **Audit dependencies** ✅ Removed unused packages like charting and map libraries.
 - **Persist progress server-side** ✅ Progress now saved to a Prisma `Progress` table via an API route.
+- **Improved API error handling** ✅ Endpoints return `{ error: 'Internal server error' }` with a 500 status when database actions fail.
 
 ---
 
