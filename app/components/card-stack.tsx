@@ -12,6 +12,7 @@ const Card2WhatIsAI = dynamic(() => import('./cards/card-2-what-is-ai').then(m =
 const Card3AITools = dynamic(() => import('./cards/card-3-ai-tools').then(m => m.Card3AITools), { loading: () => <LoadingIndicator /> });
 const Card4Quiz = dynamic(() => import('./cards/card-4-quiz').then(m => m.Card4Quiz), { loading: () => <LoadingIndicator /> });
 const Card5AdvancedQuiz = dynamic(() => import('./cards/card-5-advanced-quiz').then(m => m.default), { loading: () => <LoadingIndicator /> });
+const Card6Gestures = dynamic(() => import('./cards/card-6-gestures').then(m => m.Card6Gestures), { loading: () => <LoadingIndicator /> });
 
 export function CardStack() {
   const { state } = useHyperCard();
@@ -21,7 +22,8 @@ export function CardStack() {
     <Card2WhatIsAI key="card-2" />,
     <Card3AITools key="card-3" />,
     <Card4Quiz key="card-4" />,
-    <Card5AdvancedQuiz key="card-5" />
+    <Card5AdvancedQuiz key="card-5" />,
+    <Card6Gestures key="card-6" />
   ];
 
   return (
