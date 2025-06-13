@@ -129,15 +129,26 @@ export function HyperCardProvider({ children }: { children: React.ReactNode }) {
     return '';
   });
 
-  // Save to localStorage and server on state changes
+  // Save to localStorage immediately and debounce server updates
+  const latestStateRef = React.useRef(state);
+  const saveTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
+    latestStateRef.current = state;
     localStorage.setItem('hypercard-ai-primer-state', JSON.stringify(state));
-    fetch('/api/progress', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sessionId, state })
-    }).catch((e) => console.warn('Failed to save progress', e));
+
+    if (saveTimeoutRef.current) {
+      clearTimeout(saveTimeoutRef.current);
+    }
+    saveTimeoutRef.current = setTimeout(() => {
+      fetch('/api/progress', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId, state: latestStateRef.current })
+      }).catch((e) => console.warn('Failed to save progress', e));
+    }, 1000);
   }, [state, sessionId]);
+
 
   return (
     <HyperCardContext.Provider value={{ state, dispatch }}>

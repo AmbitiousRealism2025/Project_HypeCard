@@ -45,6 +45,8 @@ This project recreates the iconic HyperCard experience from 1987, complete with 
 3. **Progress Persistence**: Implemented localStorage for user progress tracking
 4. **Cross-browser Testing**: Ensured compatibility across modern browsers
 5. **Documentation**: Comprehensive README and code documentation
+6. **Debounced Server Updates**: Progress is now sent to the server in batches,
+   reducing network requests while local storage updates immediately
 
 ## ✨ Current MVP Features
 
@@ -59,6 +61,7 @@ This project recreates the iconic HyperCard experience from 1987, complete with 
 ### Technical Features
 - **SPA Routing**: Direct URL access to specific cards (`/card/1`, `/card/2`, etc.)
 - **State Persistence**: localStorage integration for session continuity
+- **Debounced Server Sync**: Progress updates are batched before hitting the API
 - **Keyboard Shortcuts**: Arrow keys (←/→) for navigation, Home key for card 1
 - **TypeScript Integration**: Full type safety throughout the application
 - **Component Architecture**: Reusable HyperCard-style components
