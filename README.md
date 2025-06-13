@@ -66,7 +66,7 @@ This project recreates the iconic HyperCard experience from 1987, complete with 
 ### Educational Content
 - **Structured Learning**: Progressive difficulty from basic concepts to practical applications
 - **Interactive Quiz**: Advanced system with multiple question types, scoring and certificates
-- **Certificate Display**: View your certificate after completing the Advanced Quiz
+ - **Certificate Display**: View your certificate after completing the Advanced Quiz and export it as a PDF
 - **Visual Elements**: Custom sprites and icons enhancing the learning experience
 - **Progress Indicators**: Clear tracking of completed sections and visited cards
 

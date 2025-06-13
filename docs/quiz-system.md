@@ -16,9 +16,9 @@ This document outlines the high level structure of the Phase II quiz engine.
 - **Server Persistence** – quiz results are saved with the new `/api/quiz`
   endpoint. Data is stored in the `QuizResult` table defined in the Prisma
   schema.
-- **Certificate** – once the final score is calculated, a simple certificate is
-  displayed if the user scores at least 20 points. This can later be enhanced to
-  export a PDF or image.
+ - **Certificate** – once the final score is calculated, a certificate is displayed if
+  the user scores at least 20 points, with an **Export Certificate** button that prints
+  the certificate as a PDF.
 
 ## Extending
 
