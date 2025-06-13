@@ -1,9 +1,16 @@
 
 'use client';
 
-import React, { createContext, useContext, useReducer, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  useState,
+} from 'react';
 import { HyperCardState, NavigationAction } from './types';
 import { TOTAL_CARDS } from './constants';
+import { toast } from '../components/ui/use-toast';
 
 const initialState: HyperCardState = {
   currentCard: 1,
@@ -137,25 +144,51 @@ export function HyperCardProvider({ children }: { children: React.ReactNode }) {
     return '';
   });
 
-  // Save to localStorage immediately and debounce server updates
+  // Save to localStorage immediately and batch server updates
   const latestStateRef = React.useRef(state);
   const saveTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
+  // keep the latest state in local storage on every change
   useEffect(() => {
     latestStateRef.current = state;
     localStorage.setItem('hypercard-ai-primer-state', JSON.stringify(state));
+  }, [state]);
 
+  // helper to persist progress to the server with basic retries
+  const persistProgress = React.useCallback(
+    async (attempt = 1) => {
+      try {
+        const res = await fetch('/api/progress', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionId, state: latestStateRef.current }),
+        });
+        if (!res.ok) throw new Error(`status ${res.status}`);
+      } catch (e) {
+        if (attempt < 3) {
+          setTimeout(() => persistProgress(attempt + 1), attempt * 1000);
+        } else if (typeof window !== 'undefined') {
+          toast({
+            title: 'Failed to sync progress',
+            description: 'We\'ll keep trying in the background.',
+            variant: 'destructive',
+          });
+        }
+      }
+    },
+    [sessionId]
+  );
+
+  // debounce server updates when major progress milestones occur
+  useEffect(() => {
     if (saveTimeoutRef.current) {
       clearTimeout(saveTimeoutRef.current);
     }
-    saveTimeoutRef.current = setTimeout(() => {
-      fetch('/api/progress', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sessionId, state: latestStateRef.current })
-      }).catch((e) => console.warn('Failed to save progress', e));
-    }, 1000);
-  }, [state, sessionId]);
+    saveTimeoutRef.current = setTimeout(persistProgress, 5000);
+    return () => {
+      if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+    };
+  }, [state.currentCard, state.userProgress.completedSections, state.userProgress.quizScore, persistProgress]);
 
 
   return (
