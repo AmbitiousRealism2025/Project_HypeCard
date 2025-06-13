@@ -1,6 +1,7 @@
 
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { TOTAL_CARDS } from './lib/constants';
 
 export function middleware(request: NextRequest) {
   // Handle card routing
@@ -9,7 +10,7 @@ export function middleware(request: NextRequest) {
     const id = parseInt(cardId);
     
     // Redirect invalid card IDs to home
-    if (isNaN(id) || id < 1 || id > 4) {
+    if (isNaN(id) || id < 1 || id > TOTAL_CARDS) {
       return NextResponse.redirect(new URL('/', request.url));
     }
   }

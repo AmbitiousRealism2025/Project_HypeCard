@@ -3,10 +3,11 @@
 
 import React, { createContext, useContext, useReducer, useEffect, useState } from 'react';
 import { HyperCardState, NavigationAction } from './types';
+import { TOTAL_CARDS } from './constants';
 
 const initialState: HyperCardState = {
   currentCard: 1,
-  totalCards: 6,
+  totalCards: TOTAL_CARDS,
   userProgress: {
     visitedCards: [1],
     quizAnswers: {},
