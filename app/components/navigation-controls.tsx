@@ -4,6 +4,7 @@
 import React from 'react';
 import { useHyperCard } from '../lib/hypercard-context';
 import { HCButton } from './hc-button';
+import { ThemeToggle } from './theme-toggle';
 
 export function NavigationControls() {
   const { state, dispatch } = useHyperCard();
@@ -33,15 +34,16 @@ export function NavigationControls() {
         </HCButton>
       </div>
       
-      {/* Row 2: Home button centered */}
-      <div className="flex justify-center">
-        <HCButton 
+      {/* Row 2: Home button and theme toggle */}
+      <div className="flex justify-center gap-4 items-center">
+        <HCButton
           onClick={() => dispatch({ type: 'GO_TO_CARD', payload: 1 })}
           style="shadow"
           className="text-sm px-4 py-2"
         >
           🏠 Home
         </HCButton>
+        <ThemeToggle />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect, useState } from 'react';
 import { HyperCardState, NavigationAction } from './types';
 
 const initialState: HyperCardState = {
@@ -108,11 +108,26 @@ function initState(): HyperCardState {
 
 export function HyperCardProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(hypercardReducer, initialState, initState);
+  const [sessionId] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const existing = localStorage.getItem('hypercard-session-id');
+      if (existing) return existing;
+      const id = crypto.randomUUID();
+      localStorage.setItem('hypercard-session-id', id);
+      return id;
+    }
+    return '';
+  });
 
-  // Save to localStorage on state changes
+  // Save to localStorage and server on state changes
   useEffect(() => {
     localStorage.setItem('hypercard-ai-primer-state', JSON.stringify(state));
-  }, [state]);
+    fetch('/api/progress', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sessionId, state })
+    }).catch((e) => console.warn('Failed to save progress', e));
+  }, [state, sessionId]);
 
   return (
     <HyperCardContext.Provider value={{ state, dispatch }}>

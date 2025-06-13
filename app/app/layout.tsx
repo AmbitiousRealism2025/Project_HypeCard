@@ -1,6 +1,7 @@
 
 import type { Metadata } from 'next'
 import './globals.css'
+import { ThemeProvider } from '../components/theme-provider'
 
 export const metadata: Metadata = {
   title: 'HyperCard AI Primer',
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="suppress-hydration-warning">
       <body className="suppress-hydration-warning">
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

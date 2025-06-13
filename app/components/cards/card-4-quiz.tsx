@@ -6,6 +6,7 @@ import { useHyperCard } from '../../lib/hypercard-context';
 import { HCButton } from '../hc-button';
 import { HCField } from '../hc-field';
 import { HCSprite } from '../hc-sprite';
+import cardContent from '../../data/card-4.json';
 
 export function Card4Quiz() {
   const { state, dispatch } = useHyperCard();
@@ -13,8 +14,8 @@ export function Card4Quiz() {
   const [feedback, setFeedback] = useState('');
   const [showResult, setShowResult] = useState(false);
 
-  const question = "What are the five key characteristics of AI mentioned in this primer?";
-  const correctKeywords = ['learning', 'reasoning', 'problem-solving', 'perception', 'language'];
+  const question = cardContent.question;
+  const correctKeywords = cardContent.keywords;
 
   const handleCheck = () => {
     const userAnswer = answer.toLowerCase();
@@ -47,7 +48,7 @@ export function Card4Quiz() {
     <div className="w-full h-full bg-white p-3 flex flex-col">
       {/* Header */}
       <div className="text-center mb-2">
-        <h1 className="text-lg font-bold mb-1">Mini-Quiz</h1>
+        <h1 className="text-lg font-bold mb-1">{cardContent.title}</h1>
         <div className="w-full h-px bg-black mb-2"></div>
       </div>
 
