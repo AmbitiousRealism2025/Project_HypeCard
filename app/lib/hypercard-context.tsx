@@ -46,10 +46,10 @@ function hypercardReducer(state: HyperCardState, action: NavigationAction): Hype
         }
       };
     
-    case 'GO_TO_CARD':
+    case 'GO_TO_CARD': {
       const targetCard = Math.max(1, Math.min(action.payload, state.totalCards));
-      const targetVisitedCards = state.userProgress.visitedCards.includes(targetCard) 
-        ? state.userProgress.visitedCards 
+      const targetVisitedCards = state.userProgress.visitedCards.includes(targetCard)
+        ? state.userProgress.visitedCards
         : [...state.userProgress.visitedCards, targetCard];
       return {
         ...state,
@@ -59,32 +59,38 @@ function hypercardReducer(state: HyperCardState, action: NavigationAction): Hype
           visitedCards: targetVisitedCards
         }
       };
+    }
     
-    case 'SAVE_QUIZ_ANSWER':
+    case 'SAVE_QUIZ_ANSWER': {
+      const { question, answer } = action.payload;
       return {
         ...state,
         userProgress: {
           ...state.userProgress,
           quizAnswers: {
             ...state.userProgress.quizAnswers,
-            [action.payload.question]: action.payload.answer
+            [question]: answer
           }
         }
       };
+    }
 
-    case 'SAVE_QUIZ_RESULT':
+    case 'SAVE_QUIZ_RESULT': {
+      const { score } = action.payload;
       return {
         ...state,
         userProgress: {
           ...state.userProgress,
-          quizScore: action.payload.score
+          quizScore: score
         }
       };
+    }
     
-    case 'UPDATE_PROGRESS':
-      const updatedSections = state.userProgress.completedSections.includes(action.payload) 
-        ? state.userProgress.completedSections 
-        : [...state.userProgress.completedSections, action.payload];
+    case 'UPDATE_PROGRESS': {
+      const section = action.payload;
+      const updatedSections = state.userProgress.completedSections.includes(section)
+        ? state.userProgress.completedSections
+        : [...state.userProgress.completedSections, section];
       return {
         ...state,
         userProgress: {
@@ -92,6 +98,7 @@ function hypercardReducer(state: HyperCardState, action: NavigationAction): Hype
           completedSections: updatedSections
         }
       };
+    }
     
     default:
       return state;
