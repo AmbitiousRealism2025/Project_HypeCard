@@ -208,6 +208,7 @@ yarn install
 - **Node.js**: Version 18+ required
 - **Yarn**: Preferred package manager
 - **TypeScript**: Configured for strict mode
+- **TypeScript target**: `es2017`
 
 ## 🛠️ Development Setup and Running
 
