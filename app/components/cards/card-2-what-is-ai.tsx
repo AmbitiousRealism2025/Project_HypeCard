@@ -52,7 +52,7 @@ export function Card2WhatIsAI() {
 
       {/* Navigation */}
       <div className="text-center mt-2">
-        <HCButton onClick={handleContinue} style="shadow" className="px-4 py-1 text-sm">
+        <HCButton onClick={handleContinue} variant="shadow" className="px-4 py-1 text-sm">
           Continue →
         </HCButton>
       </div>

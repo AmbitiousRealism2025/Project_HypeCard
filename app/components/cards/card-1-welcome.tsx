@@ -36,7 +36,7 @@ export function Card1Welcome() {
           {cardContent.note}
         </HCField>
 
-        <HCButton onClick={handleStart} style="shadow" className="px-4 py-1 text-sm">
+        <HCButton onClick={handleStart} variant="shadow" className="px-4 py-1 text-sm">
           Start Learning
         </HCButton>
       </div>

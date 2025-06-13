@@ -45,6 +45,7 @@ This project recreates the iconic HyperCard experience from 1987, complete with 
 3. **Progress Persistence**: Implemented localStorage for user progress tracking
 4. **Cross-browser Testing**: Ensured compatibility across modern browsers
 5. **Documentation**: Comprehensive README and code documentation
+6. **API Cleanup**: Renamed `HCButton` prop `style` to `variant` for clarity
 
 ## ✨ Current MVP Features
 

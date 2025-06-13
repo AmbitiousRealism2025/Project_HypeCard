@@ -9,7 +9,7 @@ import { useSound } from '../hooks/use-sound';
 interface HCButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
-  style?: 'default' | 'round' | 'shadow';
+  variant?: 'default' | 'round' | 'shadow';
   disabled?: boolean;
   className?: string;
   sound?: boolean;
@@ -18,7 +18,7 @@ interface HCButtonProps {
 export function HCButton({
   children,
   onClick,
-  style = 'default',
+  variant = 'default',
   disabled = false,
   className = '',
   sound = true
@@ -27,7 +27,7 @@ export function HCButton({
 
   const playSound = useSound(sound && !disabled);
   
-  const styleClasses = {
+  const variantClasses = {
     default: 'rounded-none',
     round: 'rounded-lg',
     shadow: 'rounded-none shadow-lg'
@@ -42,7 +42,7 @@ export function HCButton({
   return (
     <motion.button
       whileHover={{ scale: disabled ? 1 : 1.05 }}
-      className={`${baseClasses} ${styleClasses[style]} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`}
+      className={`${baseClasses} ${variantClasses[variant]} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`}
       onClick={handleClick}
       disabled={disabled}
       style={{

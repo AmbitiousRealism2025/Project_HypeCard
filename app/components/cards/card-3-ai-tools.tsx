@@ -41,10 +41,10 @@ export function Card3AITools() {
           <div key={tool.name} className="space-y-1">
             <div className="flex items-center space-x-2">
               <HCSprite type={tool.icon} size="small" />
-              <HCButton 
+              <HCButton
                 onClick={() => handleToolClick(tool.name)}
                 className="flex-1 text-left text-xs px-2 py-1"
-                style={selectedTool === tool.name ? "shadow" : "default"}
+                variant={selectedTool === tool.name ? "shadow" : "default"}
               >
                 {index + 1}. {tool.name}
               </HCButton>
@@ -61,7 +61,7 @@ export function Card3AITools() {
 
       {/* Navigation */}
       <div className="text-center mt-2">
-        <HCButton onClick={handleContinue} style="shadow" className="px-4 py-1 text-sm">
+        <HCButton onClick={handleContinue} variant="shadow" className="px-4 py-1 text-sm">
           Take Quiz →
         </HCButton>
       </div>

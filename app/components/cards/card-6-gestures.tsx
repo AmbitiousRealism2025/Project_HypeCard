@@ -28,7 +28,7 @@ export function Card6Gestures() {
         </HCField>
       </div>
       <div className="text-center mt-2">
-        <HCButton onClick={handleNext} style="shadow" className="px-4 py-1 text-sm">
+        <HCButton onClick={handleNext} variant="shadow" className="px-4 py-1 text-sm">
           Continue →
         </HCButton>
       </div>

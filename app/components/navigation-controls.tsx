@@ -38,7 +38,7 @@ export function NavigationControls() {
       <div className="flex justify-center gap-4 items-center">
         <HCButton
           onClick={() => dispatch({ type: 'GO_TO_CARD', payload: 1 })}
-          style="shadow"
+          variant="shadow"
           className="text-sm px-4 py-2"
         >
           🏠 Home

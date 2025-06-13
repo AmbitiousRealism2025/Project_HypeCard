@@ -79,9 +79,9 @@ export function Card4Quiz() {
 
         {!showResult ? (
           <div className="text-center">
-            <HCButton 
-              onClick={handleCheck} 
-              style="shadow" 
+            <HCButton
+              onClick={handleCheck}
+              variant="shadow"
               className="px-4 py-1 text-sm"
               disabled={!answer.trim()}
             >
@@ -96,7 +96,7 @@ export function Card4Quiz() {
             </HCField>
 
             <div className="flex justify-center space-x-2">
-              <HCButton onClick={handleRestart} style="shadow" className="px-3 py-1 text-xs">
+              <HCButton onClick={handleRestart} variant="shadow" className="px-3 py-1 text-xs">
                 Start Over
               </HCButton>
               <HCButton 
