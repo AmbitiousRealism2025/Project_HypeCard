@@ -46,6 +46,13 @@ This project recreates the iconic HyperCard experience from 1987, complete with 
 4. **Cross-browser Testing**: Ensured compatibility across modern browsers
 5. **Documentation**: Comprehensive README and code documentation
 
+### Stage 5: Interactive Polish
+1. **Animated Card Transitions**: Smooth slide animations powered by Framer Motion
+2. **Button Hover Effects**: Motion-driven hover and tap feedback on all HCButtons
+3. **Mac-Style Sound Effects**: Web Audio API beeps on navigation and UI actions
+4. **Loading Indicators**: Spinner displayed while cards load
+5. **Unit Tests**: Jest tests cover sound hooks and animation components
+
 ## ✨ Current MVP Features
 
 ### Core Functionality
