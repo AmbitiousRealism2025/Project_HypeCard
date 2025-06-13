@@ -2,6 +2,9 @@
 'use client';
 
 import React from 'react';
+import { motion } from 'framer-motion';
+
+import { useSound } from '../hooks/use-sound';
 
 interface HCButtonProps {
   children: React.ReactNode;
@@ -9,16 +12,20 @@ interface HCButtonProps {
   style?: 'default' | 'round' | 'shadow';
   disabled?: boolean;
   className?: string;
+  sound?: boolean;
 }
 
-export function HCButton({ 
-  children, 
-  onClick, 
-  style = 'default', 
+export function HCButton({
+  children,
+  onClick,
+  style = 'default',
   disabled = false,
-  className = ''
+  className = '',
+  sound = true
 }: HCButtonProps) {
   const baseClasses = 'hc-button font-mono text-sm select-none';
+
+  const playSound = useSound(sound && !disabled);
   
   const styleClasses = {
     default: 'rounded-none',
@@ -27,13 +34,14 @@ export function HCButton({
   };
 
   const handleClick = () => {
-    if (!disabled && onClick) {
-      onClick();
-    }
+    if (disabled) return;
+    if (sound) playSound();
+    onClick?.();
   };
 
   return (
-    <button
+    <motion.button
+      whileHover={{ scale: disabled ? 1 : 1.05 }}
       className={`${baseClasses} ${styleClasses[style]} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`}
       onClick={handleClick}
       disabled={disabled}
@@ -42,6 +50,6 @@ export function HCButton({
       }}
     >
       {children}
-    </button>
+    </motion.button>
   );
 }
